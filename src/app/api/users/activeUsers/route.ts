@@ -20,7 +20,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // Store users with last active timestamp
-let activeUsers: Record<string, number> = {};
+const activeUsers: Record<string, number> = {};
 
 // Expire users who haven't pinged in the last 15 seconds
 const EXPIRATION_TIME = 55 * 1000; // 15 seconds

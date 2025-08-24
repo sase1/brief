@@ -57,10 +57,20 @@ export default function NewsList() {
 
     const groupedArticles = useMemo(() => groupRelatedNews(sortedArticles), [sortedArticles]);
 
+    // const cities = useMemo(() =>
+    //         Array.from(new Set(articles.map(a => a.city))).sort((a, b) => a.localeCompare(b)),
+    //     [articles]
+    // );
+
     const cities = useMemo(() =>
-            Array.from(new Set(articles.map(a => a.city))).sort((a, b) => a.localeCompare(b)),
-        [articles]
-    );
+            Array.from(
+                new Set(
+                    articles
+                        .map(a => a.city) // default to "Other" if missing
+                        .filter(Boolean)             // remove empty strings
+                )
+            ).sort((a, b) => a.localeCompare(b)),
+        [articles]);
 
     useEffect(() => {
         setActiveTab(null); // reset selected tab

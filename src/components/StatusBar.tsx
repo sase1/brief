@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 
 interface StatusBarProps {
     currentTime: Date;
@@ -13,10 +14,20 @@ export default function StatusBar({
                                       lastUpdated,
                                       formatRelativeTime,
                                   }: StatusBarProps) {
+    const [now, setNow] = useState(Date.now());
+
+    // Update 'now' every minute to refresh relative time
+    useEffect(() => {
+        const timer = setInterval(() => setNow(Date.now()), 60000);
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 p-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg text-white font-semibold gap-2">
             {/* Clock */}
-            <div className="text-xl">🕒 {currentTime.toLocaleTimeString("en-GB", { hour12: false })}</div>
+            <div className="text-xl">
+                🕒 {currentTime.toLocaleTimeString("en-GB", { hour12: false })}
+            </div>
 
             {/* Weather */}
             {weather && (
