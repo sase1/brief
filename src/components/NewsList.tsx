@@ -12,7 +12,7 @@ import {useClock} from "@/hooks/useClock";
 import {useWeather} from "@/hooks/useWeather";
 import {useNews} from "@/hooks/useNews";
 import {useFilteredArticles} from "@/hooks/useFilteredArticles";
-// import ActiveUsers from "@/components/ActiveUsers";
+import ActiveUsers from "@/components/ActiveUsers";
 import NewsCardGroup from "@/components/NewsCardGroup";
 import {sources} from "@/data/newsSources";
 
@@ -110,7 +110,7 @@ export default function NewsList() {
 
     return (
         <div className="p-6 bg-gray-900 min-h-screen text-gray-100">
-            {/*<ActiveUsers/>*/}
+            <ActiveUsers/>
             {mounted && (
                 <StatusBar
                     currentTime={currentTime}
