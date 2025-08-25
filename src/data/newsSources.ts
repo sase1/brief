@@ -236,7 +236,7 @@ export const sources = [
     {name: "Струмица Денес", url: "https://strumicadenes.mk/feed/", city: "Струмица"},
     {name: "Strumica Net", url: "https://strumicanet.com/feed/", city: "Струмица"},
     {name: "Off Net", url: "https://off.net.mk/feed"},
-    {name: "Фемина", url: "http://www.femina.mk/rss"},
+    // {name: "Фемина", url: "http://www.femina.mk/rss"},
     {name: "М Нет", url: "https://mnet.mk/feed/"},
     {name: "Улица", url: "https://ulica.mk/feed/"},
     {name: "Турлитава", url: "https://turlitava.com/feed/"},

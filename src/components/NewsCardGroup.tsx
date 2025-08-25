@@ -1,4 +1,3 @@
-// components/NewsCardGroup.tsx
 import { useState } from "react";
 import type { Article } from "@/types/article";
 import NewsCard from "./NewsCard";

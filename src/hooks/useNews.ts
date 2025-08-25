@@ -12,7 +12,7 @@ export const useNews = () => {
             .then(res => res.json())
             .then((data: Article[]) => {
                 setArticles(prev => {
-                    const seen = new Set(prev.map(a => a.link)); // assume link is unique
+                    const seen = new Set(prev.map(a => a.link));
                     const fresh = data.filter(a => !seen.has(a.link));
 
                     return [...fresh, ...prev].sort(

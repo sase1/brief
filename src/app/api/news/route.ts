@@ -4,12 +4,9 @@ import type { Article } from "@/types/article";
 import { sources } from "@/data/newsSources";
 
 const parser = new Parser();
-
-
-// Cache storage
 let cachedNews: Article[] = [];
 let lastFetchTime = 0;
-const CACHE_DURATION = 1000 * 60 * 5; // 5 minutes
+const CACHE_DURATION = 1000 * 60 * 5;
 
 interface FeedItem {
     enclosure?: { url?: string };
@@ -18,13 +15,8 @@ interface FeedItem {
 }
 
 function extractImage(item: FeedItem, sourceUrl: string): string {
-    // 1. enclosure
     if (item.enclosure?.url) return item.enclosure.url;
-
-    // 2. media:content
     if (item["media:content"]?.url) return item["media:content"].url;
-
-    // 3. Try to parse image from HTML content
     if (item.content) {
         const match = item.content.match(/<img.*?(src|srcset|data-src)="(.*?)"/i);
         if (match) {
@@ -36,8 +28,6 @@ function extractImage(item: FeedItem, sourceUrl: string): string {
             return url;
         }
     }
-
-    // 4. fallback default
     return "/placeholder.png";
 }
 
