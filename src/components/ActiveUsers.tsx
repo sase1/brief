@@ -23,7 +23,7 @@ export default function ActiveUsers() {
         };
 
         heartbeat();
-        const interval = setInterval(heartbeat, 5000);
+        const interval = setInterval(heartbeat, 10000);
         return () => clearInterval(interval);
     }, [currentUser]);
 

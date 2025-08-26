@@ -1,6 +1,7 @@
 "use client";
 
 import {useEffect, useState, useMemo} from "react";
+import NewsCard from "@/components/NewsCard";
 import SkeletonCard from "@/components/SkeletonCard";
 import FiltersBar from "@/components/FilterBars";
 import StatusBar from "@/components/StatusBar";
@@ -25,10 +26,18 @@ export default function NewsList() {
     const { articles, loading, lastUpdated } = useNews();
     const currentTime = useClock();
     const weather = useWeather(41.9981, 21.4254);
+    // const sources = useMemo(() =>
+    //         Array.from(new Set(articles.map(a => a.source))).sort((a, b) => a.localeCompare(b)),
+    //     [articles]
+    // );
+
+
     const [showReadLater, setShowReadLater] = useState(false);
     const { readLater, toggleReadLater } = useReadLater();
     const [sortBy, setSortBy] = useState<"newest" | "oldest" | "title" | "source">("newest");
+
     const [cityFilter, setCityFilter] = useState("All");
+
     const { categories, filteredArticles } = useFilteredArticles({
         articles,
         search,
@@ -38,26 +47,36 @@ export default function NewsList() {
         readLater,
         cityFilter,
     });
+
     const sortedArticles = useMemo(() => sortArticles(filteredArticles, sortBy), [filteredArticles, sortBy]);
+
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
         setMounted(true);
     }, []);
+
     const groupedArticles = useMemo(() => groupRelatedNews(sortedArticles), [sortedArticles]);
+
+    // const cities = useMemo(() =>
+    //         Array.from(new Set(articles.map(a => a.city))).sort((a, b) => a.localeCompare(b)),
+    //     [articles]
+    // );
+
     const cities = useMemo(() =>
             Array.from(
                 new Set(
                     articles
-                        .map(a => a.city)
-                        .filter(Boolean)
+                        .map(a => a.city) // default to "Other" if missing
+                        .filter(Boolean)             // remove empty strings
                 )
             ).sort((a, b) => a.localeCompare(b)),
         [articles]);
 
     useEffect(() => {
-        setActiveTab(null);
-        setPage(1);
+        setActiveTab(null); // reset selected tab
+        setPage(1);         // reset pagination
     }, [cityFilter]);
+
 
     const filteredSources = useMemo(() => {
         if (cityFilter === "All") {
@@ -75,9 +94,15 @@ export default function NewsList() {
         ).sort((a, b) => a.localeCompare(b));
     }, [articles, cityFilter]);
 
+
+    // inside NewsList.tsx
     useEffect(() => {
         if (cityFilter === "All") return;
+
+        // find the city of the currently selected source
         const sourceCity = sources.find(s => s.name === sourceFilter)?.city;
+
+        // if current source is not from the chosen city → reset to "All"
         if (sourceCity && sourceCity !== cityFilter) {
             setSourceFilter("All");
         }
@@ -100,6 +125,7 @@ export default function NewsList() {
                 setSearch={setSearch}
                 sourceFilter={sourceFilter}
                 setSourceFilter={setSourceFilter}
+                // sources={sources}
                 sources={filteredSources}
                 sortBy={sortBy}
                 setSortBy={setSortBy}

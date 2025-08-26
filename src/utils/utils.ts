@@ -32,11 +32,24 @@ export const sortArticles = (
 
 
 export function groupRelatedNews(articles: Article[]): Article[][] {
-    const groups: { [key: string]: Article[] } = {};
+    const groups: Article[][] = [];
+
     articles.forEach(article => {
-        const key = article.title.toLowerCase().trim();
-        if (!groups[key]) groups[key] = [];
-        groups[key].push(article);
+        const snippet = article.title.toLowerCase().slice(0, 12);
+        let placed = false;
+
+        for (const group of groups) {
+            const groupSnippet = group[0].title.toLowerCase().slice(0, 12);
+
+            if (snippet === groupSnippet) {
+                group.push(article);
+                placed = true;
+                break;
+            }
+        }
+
+        if (!placed) groups.push([article]);
     });
-    return Object.values(groups);
+
+    return groups;
 }
