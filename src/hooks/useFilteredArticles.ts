@@ -22,12 +22,6 @@ export function useFilteredArticles({
                                         cityFilter
                                     }: UseFilteredArticlesProps) {
 
-    // const categories = useMemo(() => {
-    //     const filteredArticles = sourceFilter === "All" ? articles : articles.filter(a => a.source === sourceFilter);
-    //     const cats = filteredArticles.map(a => a.category ?? "Општи");
-    //     return Array.from(new Set(cats));
-    // }, [articles, sourceFilter]);
-
     const categories = useMemo(() => {
         const filteredArticles = articles.filter(a => {
             const matchesSource = sourceFilter === "All" || a.source === sourceFilter;

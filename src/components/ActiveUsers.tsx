@@ -23,7 +23,7 @@ export default function ActiveUsers() {
         };
 
         heartbeat();
-        const interval = setInterval(heartbeat, 5000);
+        const interval = setInterval(heartbeat, 20000);
         return () => clearInterval(interval);
     }, [currentUser]);
 
@@ -32,7 +32,7 @@ export default function ActiveUsers() {
             const res = await fetch("/api/users/activeUsers");
             const data = await res.json();
             setUsers(data.users);
-        }, 5000);
+        }, 20000);
 
         return () => clearInterval(interval);
     }, []);
