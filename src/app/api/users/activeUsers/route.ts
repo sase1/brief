@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const activeUsers: Record<string, number> = {};
-const EXPIRATION_TIME = 55 * 1000;
+const EXPIRATION_TIME = 60 * 1000;
 
 export async function POST(req: NextRequest) {
     const url = new URL(req.url);
