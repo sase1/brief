@@ -194,7 +194,7 @@ export const sources = [
     {name: "Трн", url: "https://trn.mk/feed/"},
     {name: "Градска", url: "https://gradska.mk/feed/"},
     {name: "Умно", url: "https://umno.mk/feed/"},
-    {name: "Метоа Аларм", url: "https://meteoalarm.mk/feed/"},
+    {name: "Метео Аларм", url: "https://meteoalarm.mk/feed/"},
     {name: "Bitola News", url: "https://bitolanews.mk/feed/", city: "Битола"},
     {name: "Web Mind", url: "https://webmind.mk/feed/"},
     {name: "Бабам Битола", url: "https://babambitola.mk/feed/", city: "Битола"},
